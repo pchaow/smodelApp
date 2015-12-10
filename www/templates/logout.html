@@ -1,0 +1,34 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">{{currentUser.title}}{{currentUser.firstname}} {{currentUser.lastname}}</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeLogout()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row">
+            <div style="margin-left:auto;margin-right:auto;">
+                <img src="{{currentUser.logo.url}}"/>
+            </div>
+        </div>
+        <div class>
+
+        </div>
+        <form>
+            <div class="list">
+                <label class="item ">
+                    <b>ชื่อ-นามสกุล : </b>
+                    {{currentUser.title}}{{currentUser.firstname}} {{currentUser.lastname}}
+                </label>
+                <label class="item ">
+                    <b>คณะ/กอง : </b>
+                    {{currentUser.faculty.name_th}}
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="button" ng-click="doLogout()">Logout</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

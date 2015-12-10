@@ -7,28 +7,30 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="row">
-            <div style="margin-left:auto;margin-right:auto;">
-                <img src="{{currentUser.logo.url}}"/>
+        <div ng-if="currentUser">
+            <div class="row">
+                <div style="margin-left:auto;margin-right:auto;">
+                    <img ng-src="{{currentUser.logo.url}}"/>
+                </div>
             </div>
-        </div>
-        <div class>
+            <div class>
 
-        </div>
-        <form>
-            <div class="list">
-                <label class="item ">
-                    <b>ชื่อ-นามสกุล : </b>
-                    {{currentUser.title}}{{currentUser.firstname}} {{currentUser.lastname}}
-                </label>
-                <label class="item ">
-                    <b>คณะ/กอง : </b>
-                    {{currentUser.faculty.name_th}}
-                </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="button" ng-click="doLogout()">Logout</button>
-                </label>
             </div>
-        </form>
+            <form>
+                <div class="list">
+                    <label class="item ">
+                        <b>ชื่อ-นามสกุล : </b>
+                        {{currentUser.title}}{{currentUser.firstname}} {{currentUser.lastname}}
+                    </label>
+                    <label class="item ">
+                        <b>คณะ/กอง : </b>
+                        {{currentUser.faculty.name_th}}
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-positive" type="button" ng-click="doLogout()">Logout</button>
+                    </label>
+                </div>
+            </form>
+        </div>
     </ion-content>
 </ion-modal-view>

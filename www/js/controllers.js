@@ -52,6 +52,8 @@ angular.module('starter.controllers', ['starter.services','ionic'])
             LoginServices.login($scope.loginData)
                 .success(function(response){
                     console.log(response);
+                    $scope.currentUser = response;
+                    $scope.closeLogin();
                 })
         };
 

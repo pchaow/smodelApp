@@ -1,8 +1,9 @@
-angular.module('starter.controllers', ['starter.services','ionic'])
+angular.module('starter.controllers', ['starter.services', 'ionic'])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout,LoginServices) {
+    .controller('AppCtrl', function ($rootScope, $ionicSideMenuDelegate, $scope, $ionicModal, $timeout
+        , API, LoginServices) {
 
-        console.log(ionic.Platform.platform())
+        $rootScope.BASE_URL = API.base_url();
 
         // Form data for the login modal
         $scope.loginData = {};
@@ -27,30 +28,9 @@ angular.module('starter.controllers', ['starter.services','ionic'])
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-
-            //$timeout(function () {
-            //    $scope.closeLogin();
-            //    $scope.currentUser = {
-            //        title : "นาย",
-            //        firstname : "เชาวน์",
-            //        lastname : "ปอแก้ว",
-            //        faculty : {
-            //            name_th : "คณะเทคโนโลยีสารสนเทศและการสื่อสาร"
-            //        },
-            //        logo : {
-            //            url : "/img/testavatar.jpg"
-            //        }
-            //
-            //    };
-            //}, 1000);
-
 
             LoginServices.login($scope.loginData)
-                .success(function(response){
+                .success(function (response) {
                     console.log(response);
                     $scope.currentUser = response;
                     $scope.closeLogin();
@@ -79,7 +59,7 @@ angular.module('starter.controllers', ['starter.services','ionic'])
             // code if using a login system
             $timeout(function () {
                 $scope.closeLogout();
-                $scope.currentUser  = null;
+                $scope.currentUser = null;
             }, 1000);
         };
 
@@ -96,5 +76,9 @@ angular.module('starter.controllers', ['starter.services','ionic'])
         ];
     })
 
+
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
+    })
+
+    .controller('SuccessListsCtrl', function ($scope, $stateParams) {
     });

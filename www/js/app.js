@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -19,10 +19,16 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            $ionicConfigProvider.tabs.position("top");
+
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+        $ionicConfigProvider.tabs.position("top");
+
         $stateProvider
 
             .state('app', {
@@ -32,43 +38,35 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
                 controller: 'AppCtrl'
             })
 
-            .state('app.search', {
+            .state('search', {
                 url: '/search',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/search.html'
-                    }
-                }
+                templateUrl: 'templates/search.html',
             })
 
-            .state('app.browse', {
+            .state('browse', {
                 url: '/browse',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/browse.html'
-                    }
-                }
+                templateUrl: 'templates/browse.html'
             })
-            .state('app.playlists', {
-                url: '/playlists',
+
+            .state('app.success', {
+                url: '/success',
+                abstract: true,
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/playlists.html',
-                        controller: 'PlaylistsCtrl'
+                        templateUrl: 'templates/success/tabs.html'
                     }
                 }
             })
 
-            .state('app.single', {
-                url: '/playlists/:playlistId',
+            .state('app.success.list', {
+                url: '/list',
                 views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
+                    'tab-recommend': {
+                        templateUrl: 'templates/success/lists.html'
                     }
                 }
             })
         ;
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/playlists');
+        $urlRouterProvider.otherwise('/app/success/list');
     });

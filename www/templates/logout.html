@@ -1,5 +1,5 @@
 <ion-modal-view>
-    <ion-header-bar>
+    <ion-header-bar class="bar-royal">
         <h1 class="title">{{currentUser.title}}{{currentUser.firstname}} {{currentUser.lastname}}</h1>
 
         <div class="buttons">
@@ -10,7 +10,7 @@
         <div ng-if="currentUser">
             <div class="row">
                 <div style="margin-left:auto;margin-right:auto;">
-                    <img ng-src="{{currentUser.logo.url}}"/>
+                    <img ng-src="{{BASE_URL + currentUser.logo.url}}?w=100&h=100&fit=crop"/>
                 </div>
             </div>
             <div class>

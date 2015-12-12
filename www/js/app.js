@@ -20,10 +20,43 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 StatusBar.styleDefault();
             }
 
-            $ionicConfigProvider.tabs.position("top");
 
         });
     })
+
+    .run(function ($rootScope, $ionicLoading) {
+        $rootScope.$on('loading:show', function () {
+            //console.log('loading:show');
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            })
+        })
+
+        $rootScope.$on('loading:hide', function () {
+            //console.log('loading:hide');
+            $ionicLoading.hide()
+        })
+    })
+
+    .config(function ($httpProvider) {
+        $httpProvider.interceptors.push(function ($rootScope, $q) {
+            return {
+                request: function (config) {
+                    $rootScope.$broadcast('loading:show')
+                    return config
+                },
+                response: function (response) {
+                    $rootScope.$broadcast('loading:hide')
+                    return response
+                },
+                responseError: function (rejection) {
+                    $rootScope.$broadcast('loading:hide')
+                    return $q.reject(rejection);
+                }
+            }
+        })
+    })
+
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
@@ -35,7 +68,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 url: '/app',
                 abstract: true,
                 templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl'
+                controller: 'AppCtrl',
+                controllerAs: 'app'
             })
 
             .state('search', {
@@ -61,10 +95,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('app.success.list', {
                 url: '/list',
                 views: {
-                    'tab-recommend': {
-                        templateUrl: 'templates/success/lists.html'
+                    'tab-list': {
+                        templateUrl: 'templates/success/lists.html',
+                        controller: 'SuccessListCtrl',
+                        controllerAs: 'listCtrl'
                     }
                 }
+            })
+
+            .state('app.success.recommend', {
+                url: '/recommend',
+                views: {
+                    'tab-recommend': {
+                        templateUrl: 'templates/success/recommend.html'
+                    }
+                }
+
             })
         ;
         // if none of the above states are matched, use this as the fallback

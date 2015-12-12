@@ -1,7 +1,12 @@
 <ion-modal-view>
     <ion-content>
-        MODAL
-
-        <button ng-click="listCtrl.closeSelectFacultyModal()">Close</button>
+        <ion-list>
+            <ion-item ng-click="listCtrl.selectFaculty(null)">
+                ทุกคณะ
+            </ion-item>
+            <ion-item ng-repeat="item in faculties" ng-click="listCtrl.selectFaculty(item)">
+               {{item.name_th}}
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-modal-view>

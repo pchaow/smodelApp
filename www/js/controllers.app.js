@@ -15,15 +15,18 @@ angular.module('starter.controllers')
         $rootScope.BASE_URL = API.base_url();
         $scope.faculties = null;
         $scope.currentUser = null;
+        $scope.currentFaculty = null;
 
-        function loadFaculty(){
+
+        function loadFaculty() {
             FacultyService.all()
-                .success(function(r){
+                .success(function (r) {
                     $scope.faculties = r;
                 })
         }
 
         loadFaculty();
+
 
         // Form data for the login modal
         vm.loginData = {};

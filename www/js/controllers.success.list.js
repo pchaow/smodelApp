@@ -6,12 +6,13 @@ angular.module('starter.controllers')
                                              $ionicModal,
                                              $ionicPopup,
                                              $timeout,
-                                             API) {
+                                             FacultyService) {
 
 
         var vm = this;
 
         vm.selectFacultyModal = null;
+        vm.projects = null;
 
         $ionicModal.fromTemplateUrl('templates/success/lists/facultyModal.html', {
             scope: $scope
@@ -28,5 +29,18 @@ angular.module('starter.controllers')
         vm.openSelectFacultyModal = function () {
             vm.selectFacultyModal.show();
         };
+
+        vm.selectFaculty = function (faculty) {
+            $scope.currentFaculty = faculty;
+            vm.closeSelectFacultyModal();
+
+            if ($scope.currentFaculty) {
+                FacultyService.projects($scope.currentFaculty)
+                    .success(function (r) {
+                        console.log(r);
+                        vm.projects =r;
+                    })
+            }
+        }
 
     })

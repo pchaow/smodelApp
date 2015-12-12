@@ -52,5 +52,13 @@ angular.module('starter.services', ['ionic',])
                     url: base_url + '/faculty'
                 })
             }
+            ,projects : function($faculty){
+                $id = $faculty.id;
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/faculty/'+$id+'/project'
+                })
+            }
         }
     })
+

@@ -2,7 +2,9 @@
     <ion-content>
         <div class="row">
             <button ng-click="listCtrl.openSelectFacultyModal()" class="button button-block button-light  icon-right ion-android-arrow-dropdown" style="text-align: left">
-                ทุกคณะ
+                <span ng-if="!currentFaculty">ทุกคณะ</span>
+                <span ng-if="currentFaculty">{{currentFaculty.name_th}}</span>
+
             </button>
         </div>
         </div>

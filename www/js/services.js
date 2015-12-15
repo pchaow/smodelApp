@@ -61,4 +61,15 @@ angular.module('starter.services', ['ionic',])
             }
         }
     })
+    .factory('ProjectService',function($http,API){
+        var base_url = API.api_base_url();
+        return {
+            all: function () {
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/project'
+                })
+            }
+        }
+    })
 

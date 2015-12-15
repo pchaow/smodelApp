@@ -2,13 +2,17 @@ angular.module('starter.controllers')
 
     .controller('AppCtrl', function ($rootScope,
                                      $ionicSideMenuDelegate,
+                                     $ionicHistory,
                                      $scope,
                                      $ionicModal,
                                      $ionicPopup,
                                      $timeout,
                                      API,
                                      LoginServices,
-                                     FacultyService) {
+                                     FacultyService,
+                                     ionicMaterialInk) {
+
+        ionicMaterialInk.displayEffect()
 
         var vm = this;
 
@@ -111,5 +115,9 @@ angular.module('starter.controllers')
                 $scope.currentUser = null;
             }, 1000);
         };
+
+        $scope.goBack =function(){
+            $ionicHistory.backView();
+        }
 
     })

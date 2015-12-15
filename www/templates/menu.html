@@ -10,19 +10,22 @@
             </ion-nav-buttons>
 
             <ion-nav-buttons side="right">
-                <a class="button button-icon button-clear ion-search" menu-close href="#/search"
-                   nav-direction="forward"></a>
+                <button class="button button-icon button-clear ion-search " menu-close ui-sref="search"
+                   nav-direction="forward"></button>
             </ion-nav-buttons>
+
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
     </ion-side-menu-content>
 
     <ion-side-menu side="left" expose-aside-when="large">
-        <ion-header-bar class="bar-royal">
-            <h1 class="title">รายการ</h1>
+        <ion-header-bar class="dark-bg expanded bar bar-header disable-user-behavior">
+            <span class="avatar" style="background: url('img/unknownUser.jpg'); background-size: cover;"></span>
+            <h2>Thronester</h2>
         </ion-header-bar>
         <ion-content>
             <ion-list>
+
                 <ion-item ng-if="currentUser" menu-close class="" ng-click="logout()">
                     <div style="margin-left:auto;margin-right:auto;text-align:center">
                         <img ng-src="{{BASE_URL + currentUser.logo.url}}?w=100&h=100&fit=crop" width="100"
@@ -33,10 +36,11 @@
                         <p>{{currentUser.faculty.name_th}}</p>
                     </div>
                 </ion-item>
-                <ion-item ng-if="!currentUser" menu-close ng-click="app.login()">
+                <ion-item ng-if="!currentUser" class="item-icon-left" menu-close ng-click="app.login()">
+                    <i class="icon ion-android-contact"></i>
                     เข้าสู่ระบบ
                 </ion-item>
-                <ion-item nav-direction="forward" menu-close href="#/browse">
+                <ion-item nav-direction="forward" class="" menu-close href="#/browse">
                     Browse
                 </ion-item>
             </ion-list>

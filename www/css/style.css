@@ -1,1 +1,16 @@
 /* Empty. Add your own CSS if you like */
+.menu h2 {
+    bottom: 0;
+    font-size: 18px;
+    left: 16px;
+    position: absolute;
+}
+
+.menu .avatar {
+    height: 88px;
+    width: 88px;
+}
+
+.list .item.item-thumbnail {
+    min-height: 100px;
+}

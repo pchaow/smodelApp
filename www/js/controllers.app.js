@@ -9,14 +9,12 @@ angular.module('starter.controllers')
                                      $timeout,
                                      API,
                                      LoginServices,
-                                     FacultyService,
-                                     ionicMaterialInk) {
+                                     FacultyService) {
 
-        ionicMaterialInk.displayEffect()
 
         var vm = this;
 
-        $rootScope.BASE_URL = API.base_url();
+
         $scope.faculties = null;
         $scope.currentUser = null;
         $scope.currentFaculty = null;

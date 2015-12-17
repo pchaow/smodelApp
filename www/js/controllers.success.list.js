@@ -2,12 +2,13 @@ angular.module('starter.controllers')
 
     .controller('SuccessListCtrl', function ($rootScope,
                                              $ionicSideMenuDelegate,
+                                             $ionicViewSwitcher,
                                              $scope,
                                              $state,
                                              $ionicModal,
-                                             $ionicViewSwitcher,
                                              $ionicPopup,
                                              $timeout,
+                                             DataService,
                                              FacultyService,
                                              ProjectService) {
 
@@ -61,8 +62,8 @@ angular.module('starter.controllers')
 
         vm.showProject = function(project){
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            $scope.currentProject = project;
-            $state.go('project');
+            DataService.setCurrentProject(project.id,project);
+            $state.go('project',{id:project.id});
         }
 
     })

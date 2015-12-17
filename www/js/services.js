@@ -1,29 +1,41 @@
 angular.module('starter.services', ['ionic',])
-    .factory('API', function () {
+    .factory('DataService',function($q,ProjectService){
+        var project = [];
 
+        return {
+            getCurrentProject: function (id) {
+                var deferred = $q.defer();
 
-        var USE_LOCAL_API = true;
+                if(project[id]){
+                    return project[id];
+                }else {
+                    ProjectService.get(id).success(function(r){
+                        deferred.resolve(r);
 
-        var LOCAL_BASE_URL = "http://success.local";
-        var GLOBAL_BASE_URL = "http://mct.ict.up.ac.th:10000";
+                    })
 
-        var API_BASE_PATH = "/m1";
+                    project[id] = deferred.promise;
+                    return project[id];
+                }
+            },
+            setCurrentProject: function(id,value) {
+                project[id] = value;
+            }
+        };
+
+    })
+    .factory('API', function ($rootScope) {
+
+        var API_BASE_URL = $rootScope.API_BASE_URL;
+        var BASE_URL = $rootScope.BASE_URL;
 
         return {
             api_base_url: function () {
-                if (USE_LOCAL_API) {
-                    return LOCAL_BASE_URL + API_BASE_PATH;
-                } else {
-                    return GLOBAL_BASE_URL + API_BASE_PATH;
-                }
+               return API_BASE_URL;
             },
 
             base_url: function () {
-                if (USE_LOCAL_API) {
-                    return LOCAL_BASE_URL;
-                } else {
-                    return GLOBAL_BASE_URL;
-                }
+                return BASE_URL;
             }
         }
     })
@@ -68,6 +80,12 @@ angular.module('starter.services', ['ionic',])
                 return $http({
                     method: 'GET',
                     url: base_url + '/project'
+                })
+            }
+            ,get : function($id){
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/project/'+$id
                 })
             }
         }

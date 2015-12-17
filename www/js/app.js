@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -23,6 +23,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 
         });
     })
+    .constant("Debugging", true)
+    .constant("GlobalConfig", {
+        "url": "http://mct.ict.up.ac.th",
+        "port": "10000"
+    })
+    .constant("LocalConfig", {
+        "url": "http://success.local",
+        "port": "80"
+    })
+    .constant("APIBasePath","/m1")
+
+    .run(function($rootScope,Debugging,GlobalConfig,LocalConfig,APIBasePath){
+        if(Debugging){
+            $rootScope.BASE_URL =LocalConfig.url + ":" + LocalConfig.port
+        }else {
+            $rootScope.BASE_URL =GlobalConfig.url + ":" + GlobalConfig.port
+        }
+        $rootScope.API_BASE_URL = $rootScope.BASE_URL + APIBasePath;
+    })
 
     .run(function ($rootScope, $ionicLoading) {
         $rootScope.$on('loading:show', function () {
@@ -37,6 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
             $ionicLoading.hide()
         })
     })
+
 
     .config(function ($httpProvider) {
         $httpProvider.interceptors.push(function ($rootScope, $q) {
@@ -64,14 +84,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 
         $stateProvider
 
-            .state('app', {
-                url: '/app',
-                abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl',
-                controllerAs: 'app'
-            })
-
             .state('search', {
                 url: '/search',
                 templateUrl: 'templates/search.html',
@@ -84,9 +96,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 templateUrl: 'templates/browse.html'
             })
 
+            .state('app', {
+                url: '/app',
+                abstract: true,
+                templateUrl: 'templates/menu.html',
+                controller: 'AppCtrl',
+                controllerAs: 'app'
+            })
+
             .state('project', {
-                url: '/project',
+                url: '/project/:id',
                 templateUrl: 'templates/project.html',
+                resolve: {
+                    project: function (DataService, $stateParams) {
+                        return DataService.getCurrentProject($stateParams.id);
+                    }
+                },
+                controller: 'ProjectCtrl',
+                controllerAs: 'ProjectCtrl',
             })
 
             .state('app.success', {

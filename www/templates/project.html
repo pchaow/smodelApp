@@ -1,4 +1,3 @@
-
 <ion-header-bar class="bar-royal">
     <div class="buttons" class="left">
         <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back" ui-sref="app.success.list"></button>
@@ -7,9 +6,22 @@
     <h1 class="title">{{ProjectCtrl.project.name}}</h1>
 </ion-header-bar>
 
+
 <ion-content>
     <div class="hero " ng-style="{'background-image':'url({{BASE_URL + ProjectCtrl.project.logo.url}}?w=746&h=400&fit=crop)'}">
-
-
+    </div>
+    <div class="mid-bar dark-bg z1 padding">
+        <p>{{ProjectCtrl.project.faculty.name_th}}</p>
+    </div>
+    <div class="tabs tabs-icon-top static">
+        <a ui-sref="app.activity" class="tab-item" href="#/app/activity">
+            <i class="icon ion-arrow-graph-up-right"></i> Activity
+        </a>
+        <a ui-sref="app.friends" class="tab-item" href="#/app/friends">
+            <i class="icon ion-android-people"></i> Friends
+        </a>
+        <a ui-sref="app.gallery" class="tab-item" href="#/app/gallery">
+            <i class="icon ion-images"></i> Photos
+        </a>
     </div>
 </ion-content>

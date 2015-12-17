@@ -2,6 +2,7 @@ angular.module('starter.controllers')
 
     .controller('ProjectCtrl', function ($scope,
                                          $stateParams,
+                                         $ionicScrollDelegate,
                                          $ionicHistory,
                                          $state,
                                          project) {
@@ -10,7 +11,7 @@ angular.module('starter.controllers')
         vm.goBack = function () {
             $state.back();
         }
-        console.log(project);
 
         vm.project = project;
+
     })

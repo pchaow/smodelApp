@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
         "port": "10000"
     })
     .constant("LocalConfig", {
-        "url": "http://success.local",
+        "url": "http://success5.local",
         "port": "80"
     })
     .constant("APIBasePath","/m1")
@@ -114,6 +114,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 },
                 controller: 'ProjectCtrl',
                 controllerAs: 'ProjectCtrl',
+            })
+            .state('project-detail', {
+                url: '/project-detail/:id',
+                templateUrl: 'templates/project-detail.html',
+                resolve: {
+                    project: function (DataService, $stateParams) {
+                        return DataService.getCurrentProject($stateParams.id);
+                    }
+                },
+                controller: 'ProjectDetailCtrl',
+                controllerAs: 'vm',
             })
 
             .state('app.success', {

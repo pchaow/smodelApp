@@ -1,27 +1,46 @@
 <ion-header-bar class="bar-royal">
-    <div class="buttons" class="left">
-        <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back" ui-sref="app.success.list"></button>
-    </div>
-
-    <h1 class="title">{{ProjectCtrl.project.name}}</h1>
+    <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
+            ui-sref="app.success.list"></button>
+    <h1 class="title">โครงการหนึ่งคณะหนึ่งโมเดล</h1>
 </ion-header-bar>
 
 
 <ion-content>
-    <div class="hero " ng-style="{'background-image':'url({{BASE_URL + ProjectCtrl.project.logo.url}}?w=746&h=400&fit=crop)'}">
+    <div class="hero"
+         ng-style="{'background-image':'url({{BASE_URL + ProjectCtrl.project.logo.url}}?w=746&h=400&fit=crop)'}">
     </div>
     <div class="mid-bar dark-bg z1 padding">
+        <h3>{{ProjectCtrl.project.name}}</h3>
         <p>{{ProjectCtrl.project.faculty.name_th}}</p>
     </div>
-    <div class="tabs tabs-icon-top static">
-        <a ui-sref="app.activity" class="tab-item" href="#/app/activity">
-            <i class="icon ion-arrow-graph-up-right"></i> Activity
-        </a>
-        <a ui-sref="app.friends" class="tab-item" href="#/app/friends">
-            <i class="icon ion-android-people"></i> Friends
-        </a>
-        <a ui-sref="app.gallery" class="tab-item" href="#/app/gallery">
-            <i class="icon ion-images"></i> Photos
-        </a>
+    <div class="padding">
+        <h4>
+            บทคัดย่อ
+        </h4>
+        <p>
+            {{ProjectCtrl.project.abstract}}
+        </p>
+        <p class="text-center">
+            <button class="button-clear" nav-direction="forward" ui-sref="project-detail({id:ProjectCtrl.project.id})">
+                อ่านต่อ
+            </button>
+        </p>
+
+        <div class="border-top">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide>
+                    <div class="box blue" style="height: 200px;">
+                        <h1 style="height: 200px;">BLUE</h1>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="box yellow"><h1>YELLOW</h1></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="box pink"><h1>PINK</h1></div>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
     </div>
+
 </ion-content>

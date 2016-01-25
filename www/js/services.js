@@ -1,24 +1,20 @@
 angular.module('starter.services', ['ionic',])
-    .factory('DataService',function($q,ProjectService){
+    .factory('DataService', function ($q, ProjectService) {
         var project = [];
 
         return {
             getCurrentProject: function (id) {
                 var deferred = $q.defer();
 
-                if(project[id]){
-                    return project[id];
-                }else {
-                    ProjectService.get(id).success(function(r){
-                        deferred.resolve(r);
+                ProjectService.get(id).success(function (r) {
+                    deferred.resolve(r);
 
-                    })
+                })
 
-                    project[id] = deferred.promise;
-                    return project[id];
-                }
+                project[id] = deferred.promise;
+                return project[id];
             },
-            setCurrentProject: function(id,value) {
+            setCurrentProject: function (id, value) {
                 project[id] = value;
             }
         };
@@ -31,7 +27,7 @@ angular.module('starter.services', ['ionic',])
 
         return {
             api_base_url: function () {
-               return API_BASE_URL;
+                return API_BASE_URL;
             },
 
             base_url: function () {
@@ -64,16 +60,16 @@ angular.module('starter.services', ['ionic',])
                     url: base_url + '/faculty'
                 })
             }
-            ,projects : function($faculty){
+            , projects: function ($faculty) {
                 $id = $faculty.id;
                 return $http({
                     method: 'GET',
-                    url: base_url + '/faculty/'+$id+'/project'
+                    url: base_url + '/faculty/' + $id + '/project'
                 })
             }
         }
     })
-    .factory('ProjectService',function($http,API){
+    .factory('ProjectService', function ($http, API) {
         var base_url = API.api_base_url();
         return {
             all: function () {
@@ -82,10 +78,10 @@ angular.module('starter.services', ['ionic',])
                     url: base_url + '/project'
                 })
             }
-            ,get : function($id){
+            , get: function ($id) {
                 return $http({
                     method: 'GET',
-                    url: base_url + '/project/'+$id
+                    url: base_url + '/project/' + $id
                 })
             }
         }

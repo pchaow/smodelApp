@@ -1,24 +1,36 @@
 <ion-header-bar class="bar-royal">
     <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
             ui-sref="app.success.list"></button>
-    <h1 class="title">โครงการหนึ่งคณะหนึ่งโมเดล</h1>
+    <h1 class="title">หนึ่งคณะหนึ่งโมเดล</h1>
 </ion-header-bar>
 
 
 <ion-content>
     <div class="hero"
-         ng-style="{'background-image':'url({{BASE_URL + ProjectCtrl.project.logo.url}}?w=746&h=400&fit=crop)'}">
+         ng-style="{'background-image':'url({{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/cover/'+ ProjectCtrl.project.cover_file}}?w=746&h=400&fit=crop)'}">
     </div>
     <div class="mid-bar dark-bg z1 padding">
-        <h3>{{ProjectCtrl.project.name}}</h3>
+        <h3>{{ProjectCtrl.project.name_th}}</h3>
         <p>{{ProjectCtrl.project.faculty.name_th}}</p>
+    </div>
+    <div class="">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="youtube in ProjectCtrl.project.youtubes">
+                <div class="box" style="height: 200px;">
+                    <a href="http://www.youtube.com/watch?v={{youtube.youtube_id}}">
+                        <img class="full-image"
+                             src="http://img.youtube.com/vi/{{youtube.youtube_id}}/hqdefault.jpg">
+                    </a>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
     </div>
     <div class="padding">
         <h4>
-            บทคัดย่อ
+            รายละเอียด
         </h4>
-        <p>
-            {{ProjectCtrl.project.abstract}}
+        <p ng-bind-html="ProjectCtrl.project.description_th_sce">
+
         </p>
         <p class="text-center">
             <button class="button-clear" nav-direction="forward" ui-sref="project-detail({id:ProjectCtrl.project.id})">
@@ -28,16 +40,11 @@
 
         <div class="border-top">
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide>
-                    <div class="box blue" style="height: 200px;">
-                        <h1 style="height: 200px;">BLUE</h1>
+                <ion-slide ng-repeat="photo in ProjectCtrl.project.photos">
+                    <div class="box" style="height: 200px;">
+                        <img class="full-image"
+                             ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?h=220&fit=crop">
                     </div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="box yellow"><h1>YELLOW</h1></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="box pink"><h1>PINK</h1></div>
                 </ion-slide>
             </ion-slide-box>
         </div>

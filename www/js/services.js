@@ -3,13 +3,26 @@ angular.module('starter.services', ['ionic',])
         var project = [];
 
         return {
-            getCurrentProject: function (id) {
+            getCurrentProject: function (id, reload) {
                 var deferred = $q.defer();
 
-                ProjectService.get(id).success(function (r) {
-                    deferred.resolve(r);
+                if (!reload) {
 
-                })
+                    if (project[id]) {
+                        return project[id];
+                    } else {
+                        ProjectService.get(id).success(function (r) {
+                            deferred.resolve(r);
+                        })
+                    }
+                } else {
+
+                    ProjectService.get(id).success(function (r) {
+                        deferred.resolve(r);
+                    })
+
+                }
+
 
                 project[id] = deferred.promise;
                 return project[id];

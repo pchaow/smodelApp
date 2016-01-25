@@ -11,16 +11,16 @@
     </div>
     <div class="mid-bar dark-bg z1 padding">
         <h3>{{ProjectCtrl.project.name_th}}</h3>
-        <p>{{ProjectCtrl.project.faculty.name_th}}</p>
+        <p>{{ProjectCtrl.project.faculty.name_th}}</p><br/>
     </div>
     <div class="">
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="youtube in ProjectCtrl.project.youtubes">
-                <div class="box" style="height: 200px;">
-                    <a href="http://www.youtube.com/watch?v={{youtube.youtube_id}}">
-                        <img class="full-image"
-                             src="http://img.youtube.com/vi/{{youtube.youtube_id}}/hqdefault.jpg">
-                    </a>
+                <div class="box">
+                    <div class="video-container">
+                        <iframe ng-src="{{youtube.url}}" frameborder="0" width="560"
+                                height="315"></iframe>
+                    </div>
                 </div>
             </ion-slide>
         </ion-slide-box>
@@ -37,17 +37,28 @@
                 อ่านต่อ
             </button>
         </p>
-
-        <div class="border-top">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide ng-repeat="photo in ProjectCtrl.project.photos">
-                    <div class="box" style="height: 200px;">
-                        <img class="full-image"
-                             ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?h=220&fit=crop">
-                    </div>
-                </ion-slide>
-            </ion-slide-box>
-        </div>
     </div>
+    <div class="mid-bar dark-bg z1 padding">
+        <h5>พื้นที่ดำเนินโครงการ</h5>
+        <p>{{ProjectCtrl.project.location}}
+            {{ProjectCtrl.project.district.DISTRICT_NAME}} {{ProjectCtrl.project.amphur.AMPHUR_NAME}}
+            {{ProjectCtrl.project.province.PROVINCE_NAME}}</p><br/>
+        <button ng-if="ProjectCtrl.project.geojson" class="button button-balanced" nav-direction="forward"
+                ui-sref="project-map({id:ProjectCtrl.project.id})">
+            แผนที่
+        </button>
+    </div>
+    <div class="padding">
+
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="photo in ProjectCtrl.project.photos">
+                <div class="box" style="">
+                    <img class="full-image"
+                         ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?h=300&fit=crop">
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </div>
+
 
 </ion-content>

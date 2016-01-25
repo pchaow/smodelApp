@@ -109,18 +109,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 templateUrl: 'templates/project.html',
                 resolve: {
                     project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id);
+                        return DataService.getCurrentProject($stateParams.id,true);
                     }
                 },
                 controller: 'ProjectCtrl',
                 controllerAs: 'ProjectCtrl',
+            })
+            .state('project-map', {
+                url: '/project-map/:id',
+                templateUrl: 'templates/project-map.html',
+                resolve: {
+                    project: function (DataService, $stateParams) {
+                        return DataService.getCurrentProject($stateParams.id,false);
+                    }
+                },
+                controller: 'ProjectMapCtrl',
+                controllerAs: 'vm',
             })
             .state('project-detail', {
                 url: '/project-detail/:id',
                 templateUrl: 'templates/project-detail.html',
                 resolve: {
                     project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id);
+                        return DataService.getCurrentProject($stateParams.id,false);
                     }
                 },
                 controller: 'ProjectDetailCtrl',

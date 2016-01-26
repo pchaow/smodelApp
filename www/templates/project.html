@@ -53,8 +53,8 @@
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="photo in ProjectCtrl.project.photos">
                 <div class="box" style="">
-                    <img class="full-image"
-                         ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?h=300&fit=crop">
+                    <img class="" style="margin-left: auto;margin-right: auto;"
+                         ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?w=375&h=300&fit=max">
                 </div>
             </ion-slide>
         </ion-slide-box>

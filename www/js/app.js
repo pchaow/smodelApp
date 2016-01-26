@@ -173,7 +173,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             .state('app.success.list', {
                 url: '/list',
                 views: {
-                    'tab-list': {
+                    'tab-detail': {
                         templateUrl: 'templates/success/lists.html',
                         controller: 'SuccessListCtrl',
                         controllerAs: 'listCtrl'
@@ -181,11 +181,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 }
             })
 
-            .state('app.success.recommend', {
-                url: '/recommend',
+            .state('app.success.contact', {
+                url: '/contact',
                 views: {
-                    'tab-recommend': {
-                        templateUrl: 'templates/success/recommend.html'
+                    'tab-detail': {
+                        templateUrl: 'templates/success/contact.html'
+                    }
+                }
+
+            })
+
+            .state('app.success.about', {
+                url: '/about',
+                views: {
+                    'tab-detail': {
+                        templateUrl: 'templates/success/about.html'
                     }
                 }
 

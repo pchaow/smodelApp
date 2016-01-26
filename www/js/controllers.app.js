@@ -14,7 +14,6 @@ angular.module('starter.controllers')
 
         var vm = this;
 
-
         $scope.faculties = null;
         $scope.currentUser = null;
         $scope.currentFaculty = null;
@@ -114,7 +113,7 @@ angular.module('starter.controllers')
             }, 1000);
         };
 
-        $scope.goBack =function(){
+        $scope.goBack = function () {
             $ionicHistory.backView();
         }
 

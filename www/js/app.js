@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -32,29 +32,51 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
         "url": "http://success5.local",
         "port": "80"
     })
-    .constant("APIBasePath","/m1")
+    .constant("APIBasePath", "/m1")
 
-    .run(function($rootScope,Debugging,GlobalConfig,LocalConfig,APIBasePath){
-        if(Debugging){
-            $rootScope.BASE_URL =LocalConfig.url + ":" + LocalConfig.port
-        }else {
-            $rootScope.BASE_URL =GlobalConfig.url + ":" + GlobalConfig.port
+    .run(function ($rootScope, Debugging, GlobalConfig, LocalConfig, APIBasePath, $ionicLoading) {
+        if (Debugging) {
+            $rootScope.BASE_URL = LocalConfig.url + ":" + LocalConfig.port
+        } else {
+            $rootScope.BASE_URL = GlobalConfig.url + ":" + GlobalConfig.port
         }
-        $rootScope.API_BASE_URL = $rootScope.BASE_URL + APIBasePath;
-    })
 
-    .run(function ($rootScope, $ionicLoading) {
+        $rootScope.API_BASE_URL = $rootScope.BASE_URL + APIBasePath;
+
+        $rootScope.loadCount = 0;
+
         $rootScope.$on('loading:show', function () {
             //console.log('loading:show');
-            $ionicLoading.show({
-                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
-            })
+            $rootScope.loadCount++;
+            if ($rootScope.loadCount == 1) {
+                $ionicLoading.show({
+                    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+                })
+            }
+
         })
+
 
         $rootScope.$on('loading:hide', function () {
             //console.log('loading:hide');
-            $ionicLoading.hide()
+            $rootScope.loadCount--;
+            if ($rootScope.loadCount == 0) {
+                $ionicLoading.hide()
+            }
+
         })
+
+        $rootScope.$on('$stateChangeStart', function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            })
+        });
+
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $ionicLoading.hide()
+        });
+
     })
 
 
@@ -109,7 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 templateUrl: 'templates/project.html',
                 resolve: {
                     project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id,true);
+                        return DataService.getCurrentProject($stateParams.id, true);
                     }
                 },
                 controller: 'ProjectCtrl',
@@ -120,7 +142,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 templateUrl: 'templates/project-map.html',
                 resolve: {
                     project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id,false);
+                        return DataService.getCurrentProject($stateParams.id, false);
                     }
                 },
                 controller: 'ProjectMapCtrl',
@@ -131,7 +153,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 templateUrl: 'templates/project-detail.html',
                 resolve: {
                     project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id,false);
+                        return DataService.getCurrentProject($stateParams.id, false);
                     }
                 },
                 controller: 'ProjectDetailCtrl',

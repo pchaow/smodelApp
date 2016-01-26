@@ -1,7 +1,6 @@
 angular.module('starter.services', ['ionic',])
-    .factory('DataService', function ($q, ProjectService) {
+    .factory('DataService', function ($q, $rootScope, ProjectService) {
         var project = [];
-
         return {
             getCurrentProject: function (id, reload) {
                 var deferred = $q.defer();
@@ -13,18 +12,22 @@ angular.module('starter.services', ['ionic',])
                     } else {
                         ProjectService.get(id).success(function (r) {
                             deferred.resolve(r);
+
                         })
                     }
                 } else {
 
                     ProjectService.get(id).success(function (r) {
                         deferred.resolve(r);
+
                     })
 
                 }
 
 
                 project[id] = deferred.promise;
+
+
                 return project[id];
             },
             setCurrentProject: function (id, value) {

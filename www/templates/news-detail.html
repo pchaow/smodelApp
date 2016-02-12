@@ -1,0 +1,25 @@
+<ion-header-bar class="bar-royal">
+    <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
+            ui-sref="app.success.news"></button>
+    <h1 class="title">{{vm.news.title}}</h1>
+</ion-header-bar>
+
+
+<ion-content>
+    <div class="hero"
+         ng-style="{'background-image':'url({{API_BASE_URL +'/post/'+vm.news.id+'/cover/'+ vm.news.cover_file}}?w=746&h=400&fit=crop)'}">
+    </div>
+    <div class="mid-bar dark-bg z1 padding">
+        <h3>{{vm.news.title}}</h3>
+    </div>
+
+    <div class="padding">
+        <h4>
+            รายละเอียด
+        </h4>
+        <p ng-bind-html="vm.news.content_sce"></p>
+    </div>
+    <div class="padding">
+        <ion-gallery ion-gallery-items="vm.news.photo_items"></ion-gallery>
+    </div>
+</ion-content>

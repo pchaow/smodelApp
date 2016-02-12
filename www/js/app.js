@@ -160,12 +160,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controllerAs: 'vm',
             })
 
+
             .state('app.success', {
                 url: '/success',
                 abstract: true,
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/success/tabs.html'
+                    }
+                }
+            })
+
+            .state('news-detail', {
+                url: '/news-detail/:id',
+                templateUrl: 'templates/news-detail.html',
+                resolve: {
+                    news: function (NewsService, $stateParams) {
+                        return NewsService.get($stateParams.id);
+                    }
+                },
+                controller: 'NewsDetailCtrl',
+                controllerAs: 'vm',
+            })
+
+            .state('app.success.news', {
+                url: '/news',
+                views: {
+                    'tab-detail': {
+                        templateUrl: 'templates/success/news_list.html',
+                        controller: 'NewsListCtrl',
+                        controllerAs: 'vm',
+                        resolve: {
+                            news : function (NewsService, $stateParams) {
+                                return NewsService.all();
+                            }
+                        },
                     }
                 }
             })

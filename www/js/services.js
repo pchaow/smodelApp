@@ -103,3 +103,21 @@ angular.module('starter.services', ['ionic',])
         }
     })
 
+    .factory('NewsService', function ($http, API) {
+        var base_url = API.api_base_url();
+        return {
+            all: function () {
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/post'
+                })
+            }
+            , get: function ($id) {
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/post/' + $id
+                })
+            }
+        }
+    })
+

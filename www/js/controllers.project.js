@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
 
-    .controller('ProjectCtrl', function ($scope,
+    .controller('ProjectCtrl', function ($rootScope,
+                                         $scope,
                                          $stateParams,
                                          $ionicScrollDelegate,
                                          $ionicHistory,
@@ -28,6 +29,19 @@ angular.module('starter.controllers')
             for (i = 0; i < project.youtubes.length; i++) {
                 vm.project.youtubes[i].url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + project.youtubes[i].youtube_id);
             }
+        }
+
+        vm.project.photo_items = [];
+        if(project.photos){
+
+            project.photos.forEach(function(a,b){
+                vm.project.photo_items.push({
+                    src: $rootScope.API_BASE_URL +'/project/'+project.id+'/photos/'+a.filename,
+                    thumb: $rootScope.API_BASE_URL +'/project/'+project.id+'/photos/'+a.filename+"?w=300&h=300&fit=crop",
+                    sub: ''
+                })
+            })
+
         }
 
     })

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ion-gallery', 'ionic-material'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -23,7 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
         });
     })
-    .constant("Debugging", true)
+    .constant("Debugging", false)
     .constant("GlobalConfig", {
         "url": "http://mct.ict.up.ac.th",
         "port": "10000"

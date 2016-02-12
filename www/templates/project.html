@@ -48,16 +48,9 @@
             แผนที่
         </button>
     </div>
-    <div class="padding">
 
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-            <ion-slide ng-repeat="photo in ProjectCtrl.project.photos">
-                <div class="box" style="">
-                    <img class="" style="margin-left: auto;margin-right: auto;"
-                         ng-src="{{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/photos/'+photo.filename}}?w=375&h=300&fit=max">
-                </div>
-            </ion-slide>
-        </ion-slide-box>
+    <div class="padding">
+        <ion-gallery ion-gallery-items="ProjectCtrl.project.photo_items"></ion-gallery>
     </div>
 
 

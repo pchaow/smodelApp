@@ -13,9 +13,7 @@ angular.module('starter.controllers')
         var vm = this;
 
         vm.news = news.data;
-
-        console.log(news.data)
-
+        
         vm.showNews = function (news) {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $state.go('news-detail', {id: news.id});

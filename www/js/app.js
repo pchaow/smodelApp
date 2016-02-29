@@ -110,7 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 url: '/search',
                 templateUrl: 'templates/search.html',
                 controller: 'SearchCtrl',
-                controllerAs: 'SearchCtrl'
+                controllerAs: 'vm'
             })
 
             .state('browse', {

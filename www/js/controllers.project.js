@@ -44,6 +44,10 @@ angular.module('starter.controllers')
 
         }
 
+        vm.back =function(){
+            window.history.back();
+        }
+
     })
 
     .controller('ProjectDetailCtrl', function ($scope,

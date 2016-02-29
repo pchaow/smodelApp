@@ -100,6 +100,15 @@ angular.module('starter.services', ['ionic',])
                     url: base_url + '/project/' + $id
                 })
             }
+            , search :function(keyword){
+                return $http({
+                    method : 'GET',
+                    url : base_url + "/project/search",
+                    params : {
+                        'keyword' : keyword
+                    }
+                })
+            }
         }
     })
 

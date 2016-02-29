@@ -1,6 +1,7 @@
 <ion-header-bar class="bar-royal">
     <div class="buttons" class="left">
-        <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back" ui-sref="app.success.list"></button>
+        <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
+                ui-sref="app.success.list"></button>
     </div>
 
 
@@ -8,21 +9,23 @@
 </ion-header-bar>
 
 <ion-content>
-    <div class="list">
-        <a class="item item-thumbnail-left">
-            <img src="img/ionic.png">
-            <h2>Ionic Framework</h2>
-            <p>A mobile development revolution</p>
-        </a>
-        <a class="item item-thumbnail-left">
-            <img src="img/google-material.png">
-            <h2>Material Design</h2>
-            <p>A visual language of design &amp; innovation</p>
-        </a>
-        <a class="item item-thumbnail-left">
-            <img src="img/logo.png">
-            <h2>Ionic Material</h2>
-            <p>Their love-child</p>
-        </a>
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <input ng-model="vm.keyword" type="text" placeholder="ค้นหา">
+        </label>
+        <button ng-click="vm.search()" class="button button-small button-positive icon">
+            <i class="ion-search"></i>
+        </button>
     </div>
+
+    <ion-list>
+        <a ng-repeat="project in vm.projects" class="item item-thumbnail item-thumbnail-left"
+           nav-direction="back" ng-click="vm.showProject(project)">
+            <img ng-src="{{API_BASE_URL +'/project/'+project.id+'/cover/'+ project.cover_file}}?w=100&h=100&fit=crop"
+                 width="100"
+                 height="100"/>
+            <h2 style="white-space: normal">{{project.name_th}}</h2>
+            <p>{{project.faculty.name_th}}</p>
+        </a>
+    </ion-list>
 </ion-content>

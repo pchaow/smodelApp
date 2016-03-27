@@ -106,24 +106,142 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 
         $stateProvider
 
-            .state('search', {
-                url: '/search',
-                templateUrl: 'templates/search.html',
-                controller: 'SearchCtrl',
-                controllerAs: 'vm'
+            //.state('search', {
+            //    url: '/search',
+            //    templateUrl: 'templates/search.html',
+            //    controller: 'SearchCtrl',
+            //    controllerAs: 'vm'
+            //})
+            //
+            //.state('browse', {
+            //    url: '/browse',
+            //    templateUrl: 'templates/browse.html'
+            //})
+            //
+            //.state('app', {
+            //    url: '/app',
+            //    abstract: true,
+            //    templateUrl: 'templates/menu.html',
+            //    controller: 'AppCtrl',
+            //    controllerAs: 'app'
+            //})
+            //
+            //.state('project', {
+            //    url: '/project/:id',
+            //    templateUrl: 'templates/project.html',
+            //    resolve: {
+            //        project: function (DataService, $stateParams) {
+            //            return DataService.getCurrentProject($stateParams.id, true);
+            //        }
+            //    },
+            //    controller: 'ProjectCtrl',
+            //    controllerAs: 'ProjectCtrl',
+            //})
+
+            //.state('project-detail', {
+            //    url: '/project-detail/:id',
+            //    templateUrl: 'templates/project-detail.html',
+            //    resolve: {
+            //        project: function (DataService, $stateParams) {
+            //            return DataService.getCurrentProject($stateParams.id, false);
+            //        }
+            //    },
+            //    controller: 'ProjectDetailCtrl',
+            //    controllerAs: 'vm',
+            //})
+            //
+            //
+            //.state('app.success', {
+            //    url: '/success',
+            //    abstract: true,
+            //    views: {
+            //        'menuContent': {
+            //            templateUrl: 'templates/success/tabs.html'
+            //        }
+            //    }
+            //})
+            //
+            //.state('news-detail', {
+            //    url: '/news-detail/:id',
+            //    templateUrl: 'templates/news-detail.html',
+            //    resolve: {
+            //        news: function (NewsService, $stateParams) {
+            //            return NewsService.get($stateParams.id);
+            //        }
+            //    },
+            //    controller: 'NewsDetailCtrl',
+            //    controllerAs: 'vm',
+            //})
+            //
+            //.state('app.success.news', {
+            //    url: '/news',
+            //    views: {
+            //        'tab-detail': {
+            //            templateUrl: 'templates/success/news_list.html',
+            //            controller: 'NewsListCtrl',
+            //            controllerAs: 'vm',
+            //            resolve: {
+            //                news : function (NewsService, $stateParams) {
+            //                    return NewsService.all();
+            //                }
+            //            },
+            //        }
+            //    }
+            //})
+            //
+            //.state('app.success.list', {
+            //    url: '/list',
+            //    views: {
+            //        'tab-detail': {
+            //            templateUrl: 'templates/success/lists.html',
+            //            controller: 'SuccessListCtrl',
+            //            controllerAs: 'listCtrl'
+            //        }
+            //    }
+            //})
+            //
+            //.state('app.success.contact', {
+            //    url: '/contact',
+            //    views: {
+            //        'tab-detail': {
+            //            templateUrl: 'templates/success/contact.html'
+            //        }
+            //    }
+            //
+            //})
+            //
+            //.state('app.success.about', {
+            //    url: '/about',
+            //    views: {
+            //        'tab-detail': {
+            //            templateUrl: 'templates/success/about.html'
+            //        }
+            //    }
+            //
+            //})
+
+            .state('projects', {
+                url: '/project',
+                templateUrl: 'templates/listprojects.html',
+                resolve: {
+                    projects : function (ProjectService,$stateParams){
+                        return ProjectService.all();
+                    }
+                },
+                controller: 'ProjectListCtrl',
+                controllerAs: 'vm',
             })
 
-            .state('browse', {
-                url: '/browse',
-                templateUrl: 'templates/browse.html'
-            })
-
-            .state('app', {
-                url: '/app',
-                abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl',
-                controllerAs: 'app'
+            .state('project-map', {
+                url: '/project/:id/map',
+                templateUrl: 'templates/project-map.html',
+                resolve: {
+                    project: function (DataService, $stateParams) {
+                        return DataService.getCurrentProject($stateParams.id, false);
+                    }
+                },
+                controller: 'ProjectMapCtrl',
+                controllerAs: 'vm',
             })
 
             .state('project', {
@@ -137,38 +255,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controller: 'ProjectCtrl',
                 controllerAs: 'ProjectCtrl',
             })
-            .state('project-map', {
-                url: '/project-map/:id',
-                templateUrl: 'templates/project-map.html',
-                resolve: {
-                    project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id, false);
-                    }
-                },
-                controller: 'ProjectMapCtrl',
-                controllerAs: 'vm',
-            })
-            .state('project-detail', {
-                url: '/project-detail/:id',
-                templateUrl: 'templates/project-detail.html',
-                resolve: {
-                    project: function (DataService, $stateParams) {
-                        return DataService.getCurrentProject($stateParams.id, false);
-                    }
-                },
-                controller: 'ProjectDetailCtrl',
-                controllerAs: 'vm',
+
+            .state('about',{
+                url: '/about-test',
+                templateUrl: 'templates/about.html',
+                controller: 'HomeCtrl'
             })
 
-
-            .state('app.success', {
-                url: '/success',
-                abstract: true,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/success/tabs.html'
+            .state('news',{
+                url: '/news-test',
+                templateUrl: 'templates/news_list.html',
+                controller: 'NewsCtrl',
+                controllerAs : 'vm',
+                resolve: {
+                    news: function (NewsService, $stateParams) {
+                        return NewsService.all();
                     }
-                }
+                },
             })
 
             .state('news-detail', {
@@ -183,53 +286,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controllerAs: 'vm',
             })
 
-            .state('app.success.news', {
-                url: '/news',
-                views: {
-                    'tab-detail': {
-                        templateUrl: 'templates/success/news_list.html',
-                        controller: 'NewsListCtrl',
-                        controllerAs: 'vm',
-                        resolve: {
-                            news : function (NewsService, $stateParams) {
-                                return NewsService.all();
-                            }
-                        },
-                    }
-                }
-            })
-
-            .state('app.success.list', {
-                url: '/list',
-                views: {
-                    'tab-detail': {
-                        templateUrl: 'templates/success/lists.html',
-                        controller: 'SuccessListCtrl',
-                        controllerAs: 'listCtrl'
-                    }
-                }
-            })
-
-            .state('app.success.contact', {
-                url: '/contact',
-                views: {
-                    'tab-detail': {
-                        templateUrl: 'templates/success/contact.html'
-                    }
-                }
-
-            })
-
-            .state('app.success.about', {
-                url: '/about',
-                views: {
-                    'tab-detail': {
-                        templateUrl: 'templates/success/about.html'
-                    }
-                }
-
+            .state('home', {
+                url: '/home',
+                templateUrl: 'templates/home.html',
+                controller: 'HomeCtrl'
             })
         ;
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/success/list');
+        $urlRouterProvider.otherwise('/home');
     });

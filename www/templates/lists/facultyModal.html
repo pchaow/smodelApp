@@ -1,10 +1,10 @@
 <ion-modal-view>
     <ion-content>
         <ion-list>
-            <ion-item class="item-divider" ng-click="listCtrl.selectFaculty(null)">
+            <ion-item class="item-divider" ng-click="vm.selectFaculty(null)">
                 ทุกคณะ
             </ion-item>
-            <ion-item class="item-divider" ng-repeat="item in faculties" ng-click="listCtrl.selectFaculty(item)">
+            <ion-item class="item-divider" ng-repeat="item in faculties" ng-click="vm.selectFaculty(item)">
                {{item.name_th}}
             </ion-item>
         </ion-list>

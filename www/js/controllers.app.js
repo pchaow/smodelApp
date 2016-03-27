@@ -116,5 +116,4 @@ angular.module('starter.controllers')
         $scope.goBack = function () {
             $ionicHistory.backView();
         }
-
     })

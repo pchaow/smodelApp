@@ -1,57 +1,60 @@
-<ion-header-bar class="bar-royal">
-    <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
-            ng-click="ProjectCtrl.back()"></button>
-    <h1 class="title">หนึ่งคณะหนึ่งโมเดล</h1>
-</ion-header-bar>
+<ion-view title="{{ProjectCtrl.project.name_th}}">
 
+    <ion-nav-bar class="bar-royal">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
 
-<ion-content>
-    <div class="hero"
-         ng-style="{'background-image':'url({{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/cover/'+ ProjectCtrl.project.cover_file}}?w=746&h=400&fit=crop)'}">
-    </div>
-    <div class="mid-bar dark-bg z1 padding">
-        <h3>{{ProjectCtrl.project.name_th}}</h3>
-        <p>{{ProjectCtrl.project.faculty.name_th}}</p><br/>
-    </div>
-    <div class="">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-            <ion-slide ng-repeat="youtube in ProjectCtrl.project.youtubes">
-                <div class="box">
-                    <div class="video-container">
-                        <iframe ng-src="{{youtube.url}}" frameborder="0" width="560"
-                                height="315"></iframe>
+    <ion-content >
+
+        <div class="hero"
+             ng-style="{'background-image':'url({{API_BASE_URL +'/project/'+ProjectCtrl.project.id+'/cover/'+ ProjectCtrl.project.cover_file}}?w=746&h=400&fit=crop)'}">
+        </div>
+        <div class="mid-bar dark-bg z1 padding">
+            <h3>{{ProjectCtrl.project.name_th}}</h3>
+            <p>{{ProjectCtrl.project.faculty.name_th}}</p><br/>
+        </div>
+        <div class="">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide ng-repeat="youtube in ProjectCtrl.project.youtubes">
+                    <div class="box">
+                        <div class="video-container">
+                            <iframe ng-src="{{youtube.url}}" frameborder="0" width="560"
+                                    height="315"></iframe>
+                        </div>
                     </div>
-                </div>
-            </ion-slide>
-        </ion-slide-box>
-    </div>
-    <div class="padding">
-        <h4>
-            รายละเอียด
-        </h4>
-        <p ng-bind-html="ProjectCtrl.project.description_th_sce">
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="padding">
+            <h4>
+                รายละเอียด
+            </h4>
+            <p ng-bind-html="ProjectCtrl.project.description_th_sce">
 
-        </p>
-        <p class="text-center">
-            <button class="button-clear" nav-direction="forward" ui-sref="project-detail({id:ProjectCtrl.project.id})">
-                อ่านต่อ
+            </p>
+            <p class="text-center">
+                <button class="button-clear" nav-direction="forward" ui-sref="project-detail({id:ProjectCtrl.project.id})">
+                    อ่านต่อ
+                </button>
+            </p>
+        </div>
+        <div class="mid-bar dark-bg z1 padding">
+            <h5>พื้นที่ดำเนินโครงการ</h5>
+            <p>{{ProjectCtrl.project.location}}
+                {{ProjectCtrl.project.district.DISTRICT_NAME}} {{ProjectCtrl.project.amphur.AMPHUR_NAME}}
+                {{ProjectCtrl.project.province.PROVINCE_NAME}}</p><br/>
+            <button ng-if="ProjectCtrl.project.geojson" class="button button-balanced" nav-direction="forward"
+                    ui-sref="project-map({id:ProjectCtrl.project.id})">
+                แผนที่
             </button>
-        </p>
-    </div>
-    <div class="mid-bar dark-bg z1 padding">
-        <h5>พื้นที่ดำเนินโครงการ</h5>
-        <p>{{ProjectCtrl.project.location}}
-            {{ProjectCtrl.project.district.DISTRICT_NAME}} {{ProjectCtrl.project.amphur.AMPHUR_NAME}}
-            {{ProjectCtrl.project.province.PROVINCE_NAME}}</p><br/>
-        <button ng-if="ProjectCtrl.project.geojson" class="button button-balanced" nav-direction="forward"
-                ui-sref="project-map({id:ProjectCtrl.project.id})">
-            แผนที่
-        </button>
-    </div>
+        </div>
 
-    <div class="padding">
-        <ion-gallery ion-gallery-items="ProjectCtrl.project.photo_items"></ion-gallery>
-    </div>
+        <div class="padding">
+            <ion-gallery ion-gallery-items="ProjectCtrl.project.photo_items"></ion-gallery>
+        </div>
 
 
-</ion-content>
+    </ion-content>
+
+</ion-view>

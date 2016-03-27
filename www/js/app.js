@@ -233,7 +233,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controller: 'ProjectDetailCtrl',
                 controllerAs: 'vm',
             })
-            
+
             .state('project-map', {
                 url: '/project/:id/map',
                 templateUrl: 'templates/project-map.html',

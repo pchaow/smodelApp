@@ -138,17 +138,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
             //    controllerAs: 'ProjectCtrl',
             //})
 
-            //.state('project-detail', {
-            //    url: '/project-detail/:id',
-            //    templateUrl: 'templates/project-detail.html',
-            //    resolve: {
-            //        project: function (DataService, $stateParams) {
-            //            return DataService.getCurrentProject($stateParams.id, false);
-            //        }
-            //    },
-            //    controller: 'ProjectDetailCtrl',
-            //    controllerAs: 'vm',
-            //})
+
             //
             //
             //.state('app.success', {
@@ -232,6 +222,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controllerAs: 'vm',
             })
 
+            .state('project-detail', {
+                url: '/project-detail/:id',
+                templateUrl: 'templates/project-detail.html',
+                resolve: {
+                    project: function (DataService, $stateParams) {
+                        return DataService.getCurrentProject($stateParams.id, false);
+                    }
+                },
+                controller: 'ProjectDetailCtrl',
+                controllerAs: 'vm',
+            })
+            
             .state('project-map', {
                 url: '/project/:id/map',
                 templateUrl: 'templates/project-map.html',

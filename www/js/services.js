@@ -138,6 +138,14 @@ angular.module('starter.services', ['ionic',])
                     method: 'GET',
                     url: base_url + '/map-data/' + $id
                 })
+            },
+            getAmphur : function ($amphur) {
+                $id = $amphur.amphur_id;
+                $name = $amphur.name
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/amphur/' + $id + '/' + $name
+                });
             }
         }
     })

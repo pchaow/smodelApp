@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ion-gallery', 'ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ion-gallery', 'ionic-material'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -106,115 +106,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 
         $stateProvider
 
-            //.state('search', {
-            //    url: '/search',
-            //    templateUrl: 'templates/search.html',
-            //    controller: 'SearchCtrl',
-            //    controllerAs: 'vm'
-            //})
-            //
-            //.state('browse', {
-            //    url: '/browse',
-            //    templateUrl: 'templates/browse.html'
-            //})
-            //
-            //.state('app', {
-            //    url: '/app',
-            //    abstract: true,
-            //    templateUrl: 'templates/menu.html',
-            //    controller: 'AppCtrl',
-            //    controllerAs: 'app'
-            //})
-            //
-            //.state('project', {
-            //    url: '/project/:id',
-            //    templateUrl: 'templates/project.html',
-            //    resolve: {
-            //        project: function (DataService, $stateParams) {
-            //            return DataService.getCurrentProject($stateParams.id, true);
-            //        }
-            //    },
-            //    controller: 'ProjectCtrl',
-            //    controllerAs: 'ProjectCtrl',
-            //})
+            .state('maps', {
+                url: '/maps',
+                templateUrl: 'templates/maps.html',
+                resolve: {
 
-
-            //
-            //
-            //.state('app.success', {
-            //    url: '/success',
-            //    abstract: true,
-            //    views: {
-            //        'menuContent': {
-            //            templateUrl: 'templates/success/tabs.html'
-            //        }
-            //    }
-            //})
-            //
-            //.state('news-detail', {
-            //    url: '/news-detail/:id',
-            //    templateUrl: 'templates/news-detail.html',
-            //    resolve: {
-            //        news: function (NewsService, $stateParams) {
-            //            return NewsService.get($stateParams.id);
-            //        }
-            //    },
-            //    controller: 'NewsDetailCtrl',
-            //    controllerAs: 'vm',
-            //})
-            //
-            //.state('app.success.news', {
-            //    url: '/news',
-            //    views: {
-            //        'tab-detail': {
-            //            templateUrl: 'templates/success/news_list.html',
-            //            controller: 'NewsListCtrl',
-            //            controllerAs: 'vm',
-            //            resolve: {
-            //                news : function (NewsService, $stateParams) {
-            //                    return NewsService.all();
-            //                }
-            //            },
-            //        }
-            //    }
-            //})
-            //
-            //.state('app.success.list', {
-            //    url: '/list',
-            //    views: {
-            //        'tab-detail': {
-            //            templateUrl: 'templates/success/lists.html',
-            //            controller: 'SuccessListCtrl',
-            //            controllerAs: 'listCtrl'
-            //        }
-            //    }
-            //})
-            //
-            //.state('app.success.contact', {
-            //    url: '/contact',
-            //    views: {
-            //        'tab-detail': {
-            //            templateUrl: 'templates/success/contact.html'
-            //        }
-            //    }
-            //
-            //})
-            //
-            //.state('app.success.about', {
-            //    url: '/about',
-            //    views: {
-            //        'tab-detail': {
-            //            templateUrl: 'templates/success/about.html'
-            //        }
-            //    }
-            //
-            //})
+                },
+                controller: 'MapCtrl',
+                controllerAs: 'vm',
+            })
 
             .state('projects', {
                 url: '/project',
                 templateUrl: 'templates/listprojects.html',
                 resolve: {
-                    projects : function (ProjectService,$stateParams){
+                    projects: function (ProjectService, $stateParams) {
                         return ProjectService.all();
                     }
                 },
@@ -258,17 +164,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controllerAs: 'ProjectCtrl',
             })
 
-            .state('about',{
+            .state('about', {
                 url: '/about-test',
                 templateUrl: 'templates/about.html',
                 controller: 'HomeCtrl'
             })
 
-            .state('news',{
+            .state('news', {
                 url: '/news-test',
                 templateUrl: 'templates/news_list.html',
                 controller: 'NewsCtrl',
-                controllerAs : 'vm',
+                controllerAs: 'vm',
                 resolve: {
                     news: function (NewsService, $stateParams) {
                         return NewsService.all();

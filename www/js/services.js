@@ -100,12 +100,12 @@ angular.module('starter.services', ['ionic',])
                     url: base_url + '/project/' + $id
                 })
             }
-            , search :function(keyword){
+            , search: function (keyword) {
                 return $http({
-                    method : 'GET',
-                    url : base_url + "/project/search",
-                    params : {
-                        'keyword' : keyword
+                    method: 'GET',
+                    url: base_url + "/project/search",
+                    params: {
+                        'keyword': keyword
                     }
                 })
             }
@@ -129,4 +129,17 @@ angular.module('starter.services', ['ionic',])
             }
         }
     })
+
+    .factory('MapService', function ($http, API) {
+        var base_url = API.api_base_url();
+        return {
+            get: function ($id) {
+                return $http({
+                    method: 'GET',
+                    url: base_url + '/map-data/' + $id
+                })
+            }
+        }
+    })
+
 

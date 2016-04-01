@@ -23,7 +23,7 @@
 
         </div>
 
-        <ion-list ng-if="vm.mapResponse"  class="card">
+        <ion-list ng-if="vm.mapResponse && vm.mapResponse.projects.length > 0"  class="card">
             <a ng-repeat="project in vm.mapResponse.projects" class="item item-thumbnail item-thumbnail-left"
                nav-direction="back" ng-click="vm.showProject(project)">
                 <img ng-src="{{API_BASE_URL +'/project/'+project.id+'/cover/'+ project.cover_file}}?w=100&h=100&fit=crop"

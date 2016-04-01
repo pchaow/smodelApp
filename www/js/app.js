@@ -165,8 +165,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             })
 
             .state('about', {
-                url: '/about-test',
+                url: '/about',
                 templateUrl: 'templates/about.html',
+                controller: 'HomeCtrl'
+            })
+
+            .state('contact', {
+                url: '/contact',
+                templateUrl: 'templates/contact.html',
                 controller: 'HomeCtrl'
             })
 

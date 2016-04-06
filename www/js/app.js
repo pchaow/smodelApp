@@ -151,7 +151,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 controller: 'ProjectMapCtrl',
                 controllerAs: 'vm',
             })
-
+            .state('search', {
+                url: '/search/:keyword',
+                templateUrl: 'templates/search.html',
+                resolve: {
+                    projects: function (ProjectService, $stateParams) {
+                        return ProjectService.search($stateParams.keyword)
+                    }
+                },
+                controller: 'SearchCtrl',
+                controllerAs: 'vm',
+            })
             .state('project', {
                 url: '/project/:id',
                 templateUrl: 'templates/project.html',

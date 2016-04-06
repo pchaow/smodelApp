@@ -1,31 +1,27 @@
-<ion-header-bar class="bar-royal">
-    <div class="buttons" class="left">
-        <button nav-direction="back" class="button button-icon button-clear ion-android-arrow-back"
-                ui-sref="app.success.list"></button>
-    </div>
+<ion-view title="ค้นหา : {{vm.keyword}}">
+    <ion-nav-bar class="bar-royal">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
 
+        <ion-nav-buttons side="right">
+            <button class="button button-clear button-icon" ng-click="vm.searchModal()">
+                <i class="ion-search"></i>
+            </button>
+        </ion-nav-buttons>
 
-    <h1 class="title">ค้นหา</h1>
-</ion-header-bar>
-
-<ion-content>
-    <div class="item item-input-inset">
-        <label class="item-input-wrapper">
-            <input ng-model="vm.keyword" type="text" placeholder="ค้นหา">
-        </label>
-        <button ng-click="vm.search()" class="button button-small button-positive icon">
-            <i class="ion-search"></i>
-        </button>
-    </div>
-
-    <ion-list>
-        <a ng-repeat="project in vm.projects" class="item item-thumbnail item-thumbnail-left"
-           nav-direction="back" ng-click="vm.showProject(project)">
-            <img ng-src="{{API_BASE_URL +'/project/'+project.id+'/cover/'+ project.cover_file}}?w=100&h=100&fit=crop"
-                 width="100"
-                 height="100"/>
-            <h2 style="white-space: normal">{{project.name_th}}</h2>
-            <p>{{project.faculty.name_th}}</p>
-        </a>
-    </ion-list>
-</ion-content>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-row>
+            <ion-list>
+                <a ng-repeat="project in vm.projects" class="item item-thumbnail item-thumbnail-left"
+                   nav-direction="back" ng-click="vm.showProject(project)">
+                    <img ng-src="{{API_BASE_URL +'/project/'+project.id+'/cover/'+ project.cover_file}}?w=100&h=100&fit=crop"
+                         width="100"
+                         height="100"/>
+                    <h2 style="white-space: normal">{{project.name_th}}</h2>
+                    <p>{{project.faculty.name_th}}</p>
+                </a>
+            </ion-list>
+        </ion-row>
+    </ion-content>
+</ion-view>

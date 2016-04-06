@@ -2,6 +2,11 @@
     <ion-nav-bar class="bar-royal">
         <ion-nav-back-button>
         </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button button-clear button-icon" ng-click="vm.searchModal()">
+                <i class="ion-search"></i>
+            </button>
+        </ion-nav-buttons>
     </ion-nav-bar>
 
     <ion-content>
@@ -27,3 +32,30 @@
         </ion-row>
     </ion-content>
 </ion-view>
+
+
+<script id="search-modal.html" type="text/ng-template">
+    <ion-modal-view title="ค้นหา">
+
+        <ion-header-bar class="bar-royal">
+            <button class="button button-clear button-icon" ng-click="vm.closeSearchModal()">
+                <i class="ion-close"></i>
+            </button>
+
+            <h1 class="title">ค้นหาโครงการ</h1>
+        </ion-header-bar>
+
+        <ion-content>
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">คำค้น</span>
+                    <input ng-model="vm.keyword" type="text" placeholder="Keyword">
+                </label>
+
+                <button class="button button-block ink" ng-click="vm.search()">
+                    ค้นหา
+                </button>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>

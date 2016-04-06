@@ -19,9 +19,9 @@ angular.module('starter.controllers')
         vm.projects = null;
         $scope.currentProject = null;
 
-        function initialize(){
+        function initialize() {
             ProjectService.all()
-                .success(function(r){
+                .success(function (r) {
                     vm.projects = r;
                     console.log(r);
                 })
@@ -55,16 +55,49 @@ angular.module('starter.controllers')
                         console.log(r);
                         vm.projects = r;
                     })
-            }else {
+            } else {
                 initialize();
             }
         }
 
-        vm.showProject = function(project){
+        vm.showProject = function (project) {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            DataService.setCurrentProject(project.id,project);
-            $state.go('project',{id:project.id});
+            DataService.setCurrentProject(project.id, project);
+            $state.go('project', {id: project.id});
         }
+
+
+        $ionicModal.fromTemplateUrl('search-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            vm.search_modal = modal;
+        });
+        vm.searchModal = function () {
+            vm.search_modal.show();
+        };
+        vm.closeSearchModal = function () {
+            vm.search_modal.hide();
+        };
+
+        vm.search = function () {
+            vm.closeSearchModal();
+            $state.go('search', {keyword: vm.keyword})
+        }
+
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function () {
+            $scope.modal.remove();
+        });
+        // Execute action on hide modal
+        $scope.$on('modal.hidden', function () {
+            // Execute action
+        });
+        // Execute action on remove modal
+        $scope.$on('modal.removed', function () {
+            // Execute action
+        });
+
 
     })
 
@@ -100,21 +133,22 @@ angular.module('starter.controllers')
         }
 
         vm.project.photo_items = [];
-        if(project.photos){
+        if (project.photos) {
 
-            project.photos.forEach(function(a,b){
+            project.photos.forEach(function (a, b) {
                 vm.project.photo_items.push({
-                    src: $rootScope.API_BASE_URL +'/project/'+project.id+'/photos/'+a.filename,
-                    thumb: $rootScope.API_BASE_URL +'/project/'+project.id+'/photos/'+a.filename+"?w=300&h=300&fit=crop",
+                    src: $rootScope.API_BASE_URL + '/project/' + project.id + '/photos/' + a.filename,
+                    thumb: $rootScope.API_BASE_URL + '/project/' + project.id + '/photos/' + a.filename + "?w=300&h=300&fit=crop",
                     sub: ''
                 })
             })
 
         }
 
-        vm.back =function(){
+        vm.back = function () {
             window.history.back();
         }
+
 
     })
 
